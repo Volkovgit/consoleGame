@@ -10,18 +10,23 @@ describe('Board', () => {
     expect(objectExemplare).to.be.a('object');
   });
 
-  describe('Board object tests', () => {
+  describe('Board object', () => {
     let boardObject;
     beforeEach(() => {
       boardObject = Board();
     });
 
-    it('Should return object 3x3', () => {
+    it('Every row in board must be 3 length', () => {
       const boardArray = boardObject.getBoard();
-      const boardArrayWidth = boardArray.length;
-      const width = 3;
-      const height = 3;
-      expect(boardArrayWidth).to.equals(width);
+      const len = 3;
+      const AllElementsHas3length = boardArray.every((el) => el.length == len);
+      expect(AllElementsHas3length).to.equals(true);
+    });
+
+    it('Board must has 3 row', () => {
+      const boardArray = boardObject.getBoard();
+      const len = 3;
+      expect(boardArray.length).to.equals(len);
     });
   });
 });

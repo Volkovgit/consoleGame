@@ -1,25 +1,36 @@
+const BoardPrinter = require('./BoardPrinter');
+
 function Board() {
   const height = 3;
   const width = 3;
-  const boardArray = () => {
+  // Найти в чем причина, при обращении по индексу к массиву от сюда заменяется весь столбец
+  const createBoard = () => {
     const rows = Array(width).fill(' ');
     const table = Array(height).fill(rows);
     return table;
   };
 
   const boardObject = {
-    board: boardArray(),
+    board: [ [ ' ', ' ', ' ' ], [ ' ', ' ', ' ' ], [ ' ', ' ', ' ' ] ],
+    printer: new BoardPrinter(),
     getBoard() {
       return this.board;
     },
     updateBoard(newBoard) {
-        this.board = newBoard
+      this.board = newBoard;
     },
+    printBoard(){
+        this.printer.printBoard(this.board);
+    },
+    setElementToBoard(i,j,elem){
+        this.board[i][j]=elem;
+    },
+    clearBoard(){
+        this.board = createBoard()
+    }
   };
 
   return boardObject;
 }
-
-// console.log(Board().getBoard());
 
 module.exports = Board;
