@@ -7,34 +7,22 @@ function userInput() {
   });
   const userInputObject = {
     rl,
-    inputTicTac() {
-      let indexInputArr = this.__inputTicTac().then(() => {
-        inputChecker = this.__checkNumbers(this.__indexTransormation(indexInputArr));
-      });
-
-      console.log(indexInputArr);
-    },
-    async __inputTicTac() {
-      let indArr;
-      await rl.question(`Введите индексы клетки : `, (indexes) => {
-        indArr = indexes;
-        rl.close();
-      });
-      return indArr;
-    },
-    __indexTransormation(indexes) {
-      return indexes.split(' ').map((el) => Number(el));
-    },
-    __checkNumbers(arrayWithIndexes) {
-      if (arrayWithIndexes.length != 2) return false;
-      if (!arrayWithIndexes.every((el) => Number.isInteger(el))) return false;
-      return true;
+    input() {
+      function callbackFunction(text) {
+        const promise = new Promise((res, rej) => {
+          const answer = rl.question(`${text}`, (input) => {
+            res(input);
+            rl.close();
+          });
+        });
+        return promise;
+      }
+      return callbackFunction;
     },
   };
 
   return userInputObject;
 }
 
-userInput().inputTicTac();
 
 module.exports = userInput;
