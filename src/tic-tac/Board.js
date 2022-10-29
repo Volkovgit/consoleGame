@@ -26,7 +26,7 @@ function Board() {
         this.board[i][j]=elem;
     },
     clearBoard(){
-        this.board = createBoard()
+        this.board = [ [ ' ', ' ', ' ' ], [ ' ', ' ', ' ' ], [ ' ', ' ', ' ' ] ];
     }
   };
 
